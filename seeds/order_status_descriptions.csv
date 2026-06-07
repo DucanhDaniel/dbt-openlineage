@@ -1,0 +1,6 @@
+status,description
+placed,Order has been placed but not yet shipped
+shipped,Order has shipped to the customer
+completed,Order delivered and confirmed received
+return_pending,Customer has indicated a return; awaiting receipt
+returned,Item has been returned to the warehouse

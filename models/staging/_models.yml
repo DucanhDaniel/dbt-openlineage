@@ -1,0 +1,46 @@
+version: 2
+
+models:
+    -   name: stg__customers
+        description: "One row per customer from the Jaffle Shop application database."
+        columns:
+            - name: customer_id
+              description: "Surrogate primary key from raw_customers.id"
+              tests:
+                - unique
+                - not_null
+            - name: first_name
+            - name: last_name
+
+    -   name: stg__orders
+        description: "One row per order placed in the Jaffle Shop app."
+        columns:
+            - name: order_id
+              description: "Surrogate primary key from raw_orders.id"
+              tests:
+                - unique
+                - not_null
+            - name: status 
+              description: "Order lifecycle state."
+              tests:
+                - accepted_values:
+                    arguments:
+                      values: [placed, shipped, completed, return_pending, returned]
+            - name: customer_id
+              description: "Foreign key to stg__customers.customer_id"
+              tests:
+                - not_null
+
+    -   name: stg__payments
+        description: "One row per payment event from Stripe (cents converted to dollars in staging)"
+        columns:
+            - name: payment_id
+              description: "Surrogate primary key from raw_payments.id"
+              tests: 
+                - unique
+                - not_null
+            - name: order_id
+              description: "Foreign key to stg__orders.order_id"
+              tests:
+                - not_null
+    

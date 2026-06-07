@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: "Application data from the Jaffle Shop app database"
+    schema: main
+    tables:
+      - name: raw_customers
+      - name: raw_orders
+  
+  - name: stripe
+    description: "Payment data landed from the Stripe payment processor"
+    schema: main
+    tables:
+      - name: raw_payments

@@ -1,0 +1,19 @@
+version: 2
+
+models:
+    - name: fct_orders
+      description: "One row per order, denormalized with customer attributes and payment totals."
+      columns:
+        - name: order_id
+          description: "Primary key. Inherited from stg__orders."
+          tests:
+            - unique
+            - not_null
+        - name: customer_id
+          description: "Foreign key to dim_customers."
+          tests:
+            - not_null
+            - relationships:
+                arguments:
+                  to: ref('dim_customers')
+                  field: customer_id
